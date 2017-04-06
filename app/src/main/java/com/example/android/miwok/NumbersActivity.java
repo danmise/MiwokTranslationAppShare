@@ -18,6 +18,7 @@ public class NumbersActivity extends AppCompatActivity {
     private MediaPlayer mMediaPlayer;
     // Handles audio focus when playing a sound file
     private AudioManager mAudioManager;
+
     /**
      * This listener gets triggered when the {@link AudioManager} has requested a focus change
      */
@@ -175,5 +176,4 @@ public class NumbersActivity extends AppCompatActivity {
             mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
         }
     }
-
 }
