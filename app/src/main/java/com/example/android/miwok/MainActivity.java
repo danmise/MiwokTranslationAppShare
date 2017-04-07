@@ -15,11 +15,10 @@
  */
 package com.example.android.miwok;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -31,56 +30,26 @@ public class MainActivity extends AppCompatActivity {
         // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_main);
 
-        // Find the view that shows the numbers category
-        TextView numbers = (TextView) findViewById(R.id.numbers);
-        TextView familyMembers = (TextView) findViewById(R.id.family);
-        TextView colors = (TextView) findViewById(R.id.colors);
-        TextView phrases = (TextView) findViewById(R.id.phrases);
+        // Find the view pager that will allow the user to swipe between fragments
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
-        // Set a click listener for those views
-        numbers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Create a new intent to open the {@link NumbersActivity
-                Intent numbersIntent = new Intent(MainActivity.this, NumbersActivity.class);
+        // Create an adapter that knows which fragment should be shown on each page
+        CategoryAdapter adapter = new CategoryAdapter(this, getSupportFragmentManager());
 
-                // start the new activity
-                startActivity(numbersIntent);
-            }
-        });
+        // Set the adapter onto the view pager
+        viewPager.setAdapter(adapter);
 
-        familyMembers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Create a new intent to open the {@link NumbersActivity
-                Intent familyMembersIntent = new Intent(MainActivity.this, FamilyMemberActivity.class);
+        // Give the TabLayout the ViewPager
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(viewPager);
 
-                // start the new activity
-                startActivity(familyMembersIntent);
-            }
-        });
+        // Set text for tabs
+        tabLayout.getTabAt(0).setText(R.string.category_numbers);
+        tabLayout.getTabAt(1).setText(R.string.category_family);
+        tabLayout.getTabAt(2).setText(R.string.category_colors);
+        tabLayout.getTabAt(3).setText(R.string.category_phrases);
 
-        colors.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Create a new intent to open the {@link NumbersActivity
-                Intent colorsIntent = new Intent(MainActivity.this, ColorsActivity.class);
 
-                // start the new activity
-                startActivity(colorsIntent);
-            }
-        });
-
-        phrases.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Create a new intent to open the {@link NumbersActivity
-                Intent phrasesIntent = new Intent(MainActivity.this, PhrasesActivity.class);
-
-                // start the new activity
-                startActivity(phrasesIntent);
-            }
-        });
     }
 
 
